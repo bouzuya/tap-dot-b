@@ -34,14 +34,20 @@ interface Results {
   failures: Result[];
 }
 
-const run = (options?: { out?: NodeJS.WritableStream; }): void => {
-  // setup helpers
-  const out =
+const run = (
+  options?: { in?: NodeJS.ReadableStream; out?: NodeJS.WritableStream; }
+): void => {
+  // setup I/O helpers
+  const input =
+    typeof options === 'undefined' || typeof options.in === 'undefined'
+      ? process.stdin
+      : options.in;
+  const output =
     typeof options === 'undefined' || typeof options.out === 'undefined'
       ? process.stdout
       : options.out;
   const p =
-    (s: string): void => void out.write(s);
+    (s: string): void => void output.write(s);
   const pln =
     (s?: string): void => p((typeof s === 'undefined' ? '' : s) + '\n');
 
@@ -71,7 +77,7 @@ const run = (options?: { out?: NodeJS.WritableStream; }): void => {
   parser.on('assert', (result: Result): void => p(result.ok ? '.' : '!'));
 
   // pipe to parser
-  process.stdin.pipe(parser);
+  input.pipe(parser);
 };
 
 export { run };
