@@ -1,6 +1,6 @@
 # tap-dot-b
 
-This is a TAP reporter that formats with dots.
+A TAP reporter that formats with dots.
 
 - `.` : Pass
 - `!` : Fail

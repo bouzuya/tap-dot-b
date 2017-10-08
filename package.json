@@ -1,0 +1,76 @@
+{
+  "name": "tap-dot-b",
+  "description": "A TAP reporter that formats with dots.",
+  "version": "0.0.0",
+  "author": {
+    "name": "bouzuya",
+    "email": "m@bouzuya.net",
+    "url": "http://bouzuya.net/"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "4"
+          }
+        }
+      ],
+      "babel-preset-power-assert"
+    ]
+  },
+  "bugs": {
+    "url": "https://github.com/bouzuya/tap-dot-b/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.13",
+    "@types/power-assert": "^1.4.29",
+    "@types/proxyquire": "^1.3.28",
+    "@types/sinon": "^2.3.5",
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-power-assert": "^1.0.0",
+    "beater": "^5.0.1",
+    "cpx": "^1.5.0",
+    "npm-run-all": "^4.1.1",
+    "nyc": "^11.2.1",
+    "power-assert": "^1.4.4",
+    "proxyquire": "1.8.0",
+    "rimraf": "^2.6.1",
+    "sinon": "^4.0.1",
+    "typescript": "^2.5.3",
+    "watch": "^1.0.2"
+  },
+  "files": [
+    "lib/"
+  ],
+  "homepage": "https://github.com/bouzuya/tap-dot-b",
+  "keywords": [
+    "reporter",
+    "tap"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bouzuya/tap-dot-b.git"
+  },
+  "scripts": {
+    "build": "npm-run-all -s \"build:tmp:ts\" \"build:tmp:es2015\" \"build:lib\"",
+    "build:lib": "npm-run-all -p \"build:lib:*\"",
+    "build:lib:dts": "cpx \".tmp/es2015/src/**/*.d.ts\" \"lib\"",
+    "build:lib:js": "cpx \".tmp/es5/src/**/*.js\" \"lib\"",
+    "build:tmp:es2015": "babel --quiet .tmp/es2015/ -d .tmp/es5/",
+    "build:tmp:ts": "tsc",
+    "clean": "rimraf \".tmp\" \"lib\"",
+    "prepublish": "npm-run-all -s \"clean\" \"build\"",
+    "test": "node .tmp/es5/test/index.js",
+    "watch": "npm-run-all -p \"watch:*\"",
+    "watch:es2015": "npm run build:tmp:es2015 -- --watch",
+    "watch:lib": "watch --wait 2 'npm run build:lib' '.tmp/es5/src/'",
+    "watch:test": "watch --wait 2 'npm test' '.tmp/es5/src' '.tmp/es5/test'",
+    "watch:ts": "tsc --watch"
+  },
+  "typings": "lib/index.d.ts"
+}
