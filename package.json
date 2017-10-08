@@ -20,6 +20,9 @@
       "babel-preset-power-assert"
     ]
   },
+  "bin": {
+    "tap-dot-b": "bin/tap-dot-b"
+  },
   "bugs": {
     "url": "https://github.com/bouzuya/tap-dot-b/issues"
   },
@@ -43,6 +46,7 @@
     "watch": "^1.0.2"
   },
   "files": [
+    "bin/",
     "lib/"
   ],
   "homepage": "https://github.com/bouzuya/tap-dot-b",
