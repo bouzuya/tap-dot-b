@@ -31,7 +31,7 @@ interface Results {
   todo: number;
   skip: number;
   plan: Plan;
-  failures: Result[]; // TODO
+  failures: Result[];
 }
 
 const p = (s: string): void => void process.stdout.write(s);
