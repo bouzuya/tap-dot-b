@@ -34,34 +34,43 @@ interface Results {
   failures: Result[];
 }
 
-const p = (s: string): void => void process.stdout.write(s);
+const run = (options?: { out?: NodeJS.WritableStream; }): void => {
+  // setup helpers
+  const out =
+    typeof options === 'undefined' || typeof options.out === 'undefined'
+      ? process.stdout
+      : options.out;
+  const p =
+    (s: string): void => void out.write(s);
+  const pln =
+    (s?: string): void => p((typeof s === 'undefined' ? '' : s) + '\n');
 
-const run = (): void => {
+  // setup parser
   const parser = new (Parser as typeof Writable)();
-  parser.on('complete', (results: Results) => {
-    if (results.count > 0) p('\n');
+  parser.on('complete', (results: Results): void => {
+    if (results.count > 0) pln();
     if (results.fail > 0) {
-      p('\n');
+      pln();
       results.failures.forEach((result) => {
         const { diag, id, name } = result;
-        p('  not ok ' + id + ' - ' + name + '\n');
+        pln('  not ok ' + id + ' - ' + name);
         if (typeof diag === 'undefined' || diag === null) return;
-        p('    ---\n');
-        p('    ' + safeDump(diag).split('\n').join('\n    ') + '\n');
-        p('    ...\n');
+        pln('    ---');
+        pln('    ' + safeDump(diag).split('\n').join('\n    '));
+        pln('    ...');
       });
-      p('\n');
+      pln();
     }
-    p(results.count + ' tests\n');
-    p(results.pass + ' passed\n');
+    pln(results.count + ' tests');
+    pln(results.pass + ' passed');
     if (!results.ok) {
-      p(results.fail + ' failed\n');
+      pln(results.fail + ' failed');
       process.exit(1);
     }
   });
-  parser.on('assert', (result: Result) => {
-    p(result.ok ? '.' : '!');
-  });
+  parser.on('assert', (result: Result): void => p(result.ok ? '.' : '!'));
+
+  // pipe to parser
   process.stdin.pipe(parser);
 };
 
