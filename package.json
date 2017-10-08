@@ -69,7 +69,7 @@
     "build:tmp:ts": "tsc",
     "clean": "rimraf \".tmp\" \"lib\"",
     "prepublish": "npm-run-all -s \"clean\" \"build\"",
-    "test": "node .tmp/es5/test/index.js",
+    "test": "nyc node .tmp/es5/test",
     "watch": "npm-run-all -p \"watch:*\"",
     "watch:es2015": "npm run build:tmp:es2015 -- --watch",
     "watch:lib": "watch --wait 2 'npm run build:lib' '.tmp/es5/src/'",
