@@ -67,9 +67,9 @@ $ node .tmp/es5/test/index.js | $(npm bin)/tap-dot-b
 [![npm version][npm-badge-url]][npm-url]
 [![Travis CI][travisci-badge-url]][travisci-url]
 
-[npm-badge-url]: https://badge.fury.io/js/tap-dot-b.svg
+[npm-badge-url]: https://img.shields.io/npm/v/tap-dot-b.svg
 [npm-url]: https://www.npmjs.com/package/tap-dot-b
-[travisci-badge-url]: https://travis-ci.org/bouzuya/tap-dot-b.svg?branch=master
+[travisci-badge-url]: https://img.shields.io/travis/bouzuya/tap-dot-b.svg
 [travisci-url]: https://travis-ci.org/bouzuya/tap-dot-b
 
 ## License
