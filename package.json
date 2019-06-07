@@ -67,7 +67,7 @@
     "build:tmp:es2015": "babel --out-dir .tmp/es5/ .tmp/es2015/",
     "build:tmp:ts": "tsc",
     "clean": "rimraf \".tmp\" \"lib\"",
-    "prepublishOnly": "npm-run-all -s \"clean\" \"build\"",
+    "prepare": "npm-run-all -s \"clean\" \"build\"",
     "test": "nyc node .tmp/es5/test",
     "watch": "npm-run-all -p \"watch:*\"",
     "watch:es2015": "npm run build:tmp:es2015 -- --watch",
