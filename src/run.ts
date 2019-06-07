@@ -1,6 +1,6 @@
 import { safeDump } from 'js-yaml';
 import { Writable } from 'stream';
-import * as Parser from 'tap-parser';
+import Parser from 'tap-parser';
 
 // tap-parser Result
 interface Result {
