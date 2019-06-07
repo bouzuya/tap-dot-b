@@ -1,7 +1,7 @@
 {
   "name": "tap-dot-b",
   "description": "A TAP reporter that formats with dots.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "bouzuya <m@bouzuya.net> (https://bouzuya.net/)",
   "babel": {
     "presets": [
